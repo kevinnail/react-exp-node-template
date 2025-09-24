@@ -4,6 +4,7 @@ import './Auth.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useUser } from '../../hooks/useUser.js';
+import Loading from '../Loading/Loading.js';
 
 export default function Auth() {
   const [email, setEmail] = useState('');
@@ -11,6 +12,7 @@ export default function Auth() {
   const [isSignIn, setIsSignIn] = useState(true);
   const { logInUser, user, loading, setLoading } = useUser();
   const { type } = useParams();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,11 +20,6 @@ export default function Auth() {
       navigate('/auth-test');
     }
   }, [user]);
-
-  // Don't render until user context is loaded
-  if (loading) {
-    return <div className="auth-container">Loading...</div>;
-  }
 
   const submitAuth = async () => {
     try {
@@ -58,11 +55,9 @@ export default function Auth() {
     navigate('/');
   };
 
-  if (loading) {
-    return <div className="auth-container">Loading...</div>;
-  }
-
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <>
       <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
         <button className="home-link" onClick={handleGoHome}>
