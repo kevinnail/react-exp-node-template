@@ -43,12 +43,22 @@ Before setting up this project, ensure you have:
    Create a `.env` file in the `server` directory with the following variables:
 
    ```env
+   # Authentication Configuration
+   SALT_ROUNDS=10
+   COOKIE_NAME=session
+   JWT_SECRET=your_jwt_secret_key
+   SECURE_COOKIES=false
+
+   # PostgreSQL Configuration
    PG_USER=your_postgres_username
    PG_HOST=localhost
    PG_DATABASE=your_database_name
    PG_PASSWORD=your_postgres_password
    PG_PORT=5432
-   JWT_SECRET=your_jwt_secret_key
+
+   # Server Configuration
+   PORT=5000
+   DATABASE_URL=http://localhost
    ```
 
 4. **Set up the database**
