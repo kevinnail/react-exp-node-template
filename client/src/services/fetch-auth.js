@@ -76,7 +76,7 @@ export async function signInUser(email, password) {
 
 export async function signOutUser() {
   try {
-        const resp = await fetch(`${BASE_URL}/api/v1/users/sessions`, {
+    const resp = await fetch(`${BASE_URL}/api/v1/users/sessions`, {
       method: 'DELETE',
       credentials: 'include',
     });
