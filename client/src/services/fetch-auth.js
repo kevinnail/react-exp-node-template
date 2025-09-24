@@ -39,13 +39,13 @@ export async function signUpUser(email, password) {
 
     if (resp.ok) {
       await signInUser(email, password);
-      return { user: data, error: null };
+      return data;
     } else {
-      return { user: null, error: data.message };
+      throw new Error(data.message || 'Failed to sign up');
     }
   } catch (error) {
     console.error('Error in signUpUser:', error);
-    return { user: null, error: `Failed to sign up: ${error.message}` };
+    throw error;
   }
 }
 
@@ -64,13 +64,13 @@ export async function signInUser(email, password) {
 
     const data = await resp.json();
     if (resp.ok) {
-      return { user: data.user, error: null };
+      return data.user;
     } else {
-      return { user: null, error: data.message };
+      throw new Error(data.message || 'Failed to sign in');
     }
   } catch (error) {
     console.error('Error in signInUser:', error);
-    return { user: null, error: `Failed to sign in: ${error.message}` };
+    throw error;
   }
 }
 
@@ -81,7 +81,7 @@ export async function signOutUser() {
       credentials: 'include',
     });
     if (resp.ok) {
-      return { success: true };
+      return true;
     } else {
       throw new Error('Failed to sign out');
     }
