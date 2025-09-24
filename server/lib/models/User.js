@@ -1,4 +1,4 @@
-import pool from '../utils/pool.js';
+import { pool } from '../utils/db.js';
 
 export default class User {
   id;
@@ -12,14 +12,14 @@ export default class User {
     this.#passwordHash = row.password_hash;
   }
 
-  static async insert({email, passwordHash }) {
+  static async insert({ email, passwordHash }) {
     const { rows } = await pool.query(
       `
       INSERT INTO users (email, password_hash)
-      VALUES ($1, $2, $3, $4)
+      VALUES ($1, $2)
       RETURNING *
     `,
-      [ email, passwordHash]
+      [email, passwordHash]
     );
 
     return new User(rows[0]);
