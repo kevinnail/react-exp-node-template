@@ -1,44 +1,22 @@
-/* loader.css */
 .loader {
-  inline-size: var(--loader-size);
-  block-size: var(--loader-size);
-  color: var(--loader-color);
+  width: 48px;
+  height: 48px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #8b5cf6;
   border-radius: 50%;
-  background: conic-gradient(
-    from 0turn,
-    transparent 10%,
-    currentColor 0 80%,
-    transparent 0
-  );
-  -webkit-mask: radial-gradient(
-    farthest-side,
-    transparent calc(100% - var(--loader-thickness)),
-    #000 0
-  );
-  mask: radial-gradient(
-    farthest-side,
-    transparent calc(100% - var(--loader-thickness)),
-    #000 0
-  );
-  animation: loader-spin var(--loader-speed) linear infinite;
-  display: inline-block;
+  animation: loader-spin 1s linear infinite;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
 }
 
 @keyframes loader-spin {
-  to {
-    transform: rotate(1turn);
+  0% {
+    transform: rotate(0deg);
   }
-}
-
-/* reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  .loader {
-    animation: none;
-    background: conic-gradient(
-      from 0.125turn,
-      transparent 10%,
-      currentColor 0 80%,
-      transparent 0
-    );
+  100% {
+    transform: rotate(360deg);
   }
 }
