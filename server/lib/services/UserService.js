@@ -1,17 +1,15 @@
-    import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-// const User = require('../models/User');
 import User from '../models/User.js';
 
 export default class UserService {
-  static async create({  email, password }) {
+  static async create({ email, password }) {
     const passwordHash = await bcrypt.hash(
       password,
       Number(process.env.SALT_ROUNDS)
     );
 
     const user = await User.insert({
-
       email,
       passwordHash,
     });
@@ -33,7 +31,7 @@ export default class UserService {
         expiresIn: '1 day',
       });
 
-      return token;
+      return { token, user };
     } catch (error) {
       error.status = 401;
       throw error;
