@@ -8,6 +8,7 @@ A ready-to-use template for building full-stack applications with React and Expr
 - Express backend with ES6 modules
 - PostgreSQL database with connection pooling
 - JWT authentication with bcrypt password hashing
+- Zustand for state management (replacing React Context)
 - ESLint and Prettier configured
 - Jest and Supertest for testing
 - Concurrent development server
@@ -99,7 +100,7 @@ Before setting up this project, ensure you have:
 ├── client/                 # React frontend
 │   ├── src/
 │   │   ├── components/     # React components
-│   │   ├── contexts/       # React contexts
+│   │   ├── stores/         # Zustand stores
 │   │   ├── hooks/          # Custom hooks
 │   │   └── services/        # API services
 │   └── public/             # Static assets
