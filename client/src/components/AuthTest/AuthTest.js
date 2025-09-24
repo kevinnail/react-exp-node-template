@@ -14,7 +14,7 @@ export default function AuthTest() {
       setUserId(null);
       toast.success('Successfully signed out!');
     } catch (error) {
-      toast.error('Sign out failed.');
+      toast.error('Sign out failed.', error);
     }
   };
 
