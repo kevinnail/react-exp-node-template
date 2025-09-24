@@ -1,6 +1,7 @@
 {
   "name": "my-fullstack-template",
   "version": "1.0.0",
+  "type": "module",
   "description": "Full-stack React and Express template",
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
@@ -12,6 +13,12 @@
     "format": "cd client && npm run format && cd ../server && npm run format"
   },
   "devDependencies": {
-    "concurrently": "^9.2.0"
+    "@eslint/js": "^9.36.0",
+    "concurrently": "^9.2.0",
+    "eslint": "^9.36.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.4.0",
+    "prettier": "^3.6.2"
   }
 }

@@ -1,5 +1,3 @@
-// Import process explicitly since it's not being polyfilled
-import process from 'process';
 const BASE_URL = process.env.REACT_APP_BASE_URL || '';
 
 /* Auth related functions */
