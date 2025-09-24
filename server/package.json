@@ -9,6 +9,8 @@
     "start:watch": "nodemon server.js",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --verbose --runInBand --forceExit",
     "test:watch": "npm run test -- --watch",
+    "setup-db": "node -r dotenv/config setup-db.js",
+    "setup-test-db": "node -r dotenv/config setup-test-db.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.js\""
