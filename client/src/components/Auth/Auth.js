@@ -1,26 +1,26 @@
 import React, { useState } from 'react';
-import { NavLink, useParams, useNavigate, useLocation } from 'react-router-dom';
-import { useUser } from '../../hooks/useUser.js';
-import { useLoading } from '../../contexts/LoadingContext.js';
-import ChatLoadingInline from '../ChatLoadingInline/ChatLoadingInline.js';
+// import { NavLink, useParams, useNavigate, useLocation } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation, useParams } from 'react-router-dom';
+// import { useUser } from '../../hooks/useUser.js';
 import './Auth.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useUser } from '../../hooks/useUser.js';
 
 export default function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSignIn, setIsSignIn] = useState(true);
-  const { user, logInUser } = useUser();
-  const { authLoading } = useLoading();
+  // const { user, logInUser } = useUser();
+  const {  logInUser } = useUser();
   const { type } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const [loading, setLoading] = useState(false);
 
-  if (!window.isLocal && user.id === 'demo-user' && user.email === 'demo@example.com') {
-    navigate('/');
-  }
+  // if (!window.isLocal && user.id === 'demo-user' && user.email === 'demo@example.com') {
+  //   navigate('/');
+  // }
 
   const submitAuth = async () => {
     try {
@@ -55,7 +55,7 @@ export default function Auth() {
   if (loading) {
     return (
       <div className="auth-container">
-        <ChatLoadingInline props="authentication" />
+        Loading...
       </div>
     );
   }
@@ -84,7 +84,7 @@ export default function Auth() {
           placeholder="email@email.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          disabled={authLoading}
+        //   disabled={authLoading}
           required
         />
 
@@ -94,10 +94,11 @@ export default function Auth() {
           placeholder="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          disabled={authLoading}
+        //   disabled={authLoading}
           required
         />
-        <button type="submit" disabled={authLoading}>
+        {/* <button type="submit" disabled={authLoading}> */}
+        <button type="submit">
           {isSignIn ? 'Sign In' : 'Sign Up'}
         </button>
       </form>
