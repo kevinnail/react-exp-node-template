@@ -8,7 +8,7 @@ function Home() {
         <h1>Full-Stack Template</h1>
         <p>Welcome to your React + Node.js application</p>
       </header>
-      
+
       <main className="home-content">
         <div className="feature-grid">
           <div className="feature-card">
@@ -18,7 +18,7 @@ function Home() {
               Test API
             </Link>
           </div>
-          
+
           <div className="feature-card">
             <h3>Authentication</h3>
             <p>User login, registration, and session management</p>
@@ -26,13 +26,11 @@ function Home() {
               Go to Auth
             </Link>
           </div>
-          
+
           <div className="feature-card">
             <h3>Dashboard</h3>
             <p>Main application dashboard (coming soon)</p>
-            <div className="feature-link disabled">
-              Dashboard
-            </div>
+            <div className="feature-link disabled">Dashboard</div>
           </div>
         </div>
       </main>
