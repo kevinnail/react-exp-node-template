@@ -12,6 +12,7 @@ export default function Auth() {
   const { logInUser, user, loading, setLoading } = useUser();
   const { type } = useParams();
   const navigate = useNavigate();
+
   useEffect(() => {
     if (user) {
       navigate('/auth-test');
@@ -53,58 +54,69 @@ export default function Auth() {
     }
   };
 
+  const handleGoHome = () => {
+    navigate('/');
+  };
+
   if (loading) {
     return <div className="auth-container">Loading...</div>;
   }
 
   return (
-    <div className="auth-container">
-      <div className="sign-in-sign-out">
-        <NavLink
-          className="link"
-          to="/auth/sign-in"
-          onClick={() => setIsSignIn(true)}
-        >
-          Sign-in
-        </NavLink>
-        <NavLink
-          className="link"
-          to="/auth/sign-up"
-          onClick={() => setIsSignIn(false)}
-        >
-          Sign-up
-        </NavLink>
+    <>
+      <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <button className="home-link" onClick={handleGoHome}>
+          Home
+        </button>
       </div>
+      <div className="auth-container">
+        <div className="sign-in-sign-out">
+          <NavLink
+            className="link"
+            to="/auth/sign-in"
+            onClick={() => setIsSignIn(true)}
+          >
+            Sign-in
+          </NavLink>
+          <NavLink
+            className="link"
+            to="/auth/sign-up"
+            onClick={() => setIsSignIn(false)}
+          >
+            Sign-up
+          </NavLink>
+        </div>
 
-      <form
-        className="email-container"
-        onSubmit={(e) => {
-          e.preventDefault();
-          submitAuth();
-        }}
-      >
-        <input
-          className="input"
-          type="email"
-          placeholder="email@email.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          //   disabled={authLoading}
-          required
-        />
+        <form
+          className="email-container"
+          onSubmit={(e) => {
+            e.preventDefault();
+            submitAuth();
+          }}
+        >
+          <input
+            className="input"
+            type="email"
+            placeholder="email@email.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            //   disabled={authLoading}
+            required
+          />
 
-        <input
-          className="input"
-          type="password"
-          placeholder="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          //   disabled={authLoading}
-          required
-        />
-        {/* <button type="submit" disabled={authLoading}> */}
-        <button type="submit">{isSignIn ? 'Sign In' : 'Sign Up'}</button>
-      </form>
-    </div>
+          <input
+            className="input"
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            //   disabled={authLoading}
+            required
+          />
+          {/* <button type="submit" disabled={authLoading}> */}
+          <button type="submit">{isSignIn ? 'Sign In' : 'Sign Up'}</button>
+        </form>
+      </div>
+    </>
   );
 }
