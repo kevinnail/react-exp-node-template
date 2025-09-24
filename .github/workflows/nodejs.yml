@@ -11,7 +11,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: node:latest
     services:
       postgres:
         image: ankane/pgvector
@@ -19,22 +18,37 @@ jobs:
           POSTGRES_USER: knail
           POSTGRES_PASSWORD: knail
           POSTGRES_DB: my_new_db
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
-      - uses: actions/checkout@v2
-      - run: npm ci
-      - run: npm ci
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Install server dependencies
+        run: npm ci
         working-directory: ./server
-      - run: npx eslint ./server --fix
-      - run: npx eslint ./server --max-warnings 10
-      - run: npm test -- -u
+      - name: Run ESLint
+        run: npx eslint ./server --fix
+      - name: Run ESLint with warnings limit
+        run: npx eslint ./server --max-warnings 10
+      - name: Run tests
+        run: npm test -- -u
         working-directory: ./server
         env:
           CI: true
           NODE_OPTIONS: --experimental-vm-modules
-          DATABASE_URL: postgres://knail:knail@postgres:5432/knail
-          PG_USER: postgres
+          DATABASE_URL: postgres://knail:knail@localhost:5432/my_new_db
+          PG_USER: knail
           PG_HOST: localhost
-          PG_PASSWORD: postgres
+          PG_PASSWORD: knail
           PG_PORT: 5432
           JWT_SECRET: test-jwt-secret-for-testing-only
           COOKIE_NAME: test-session-cookie
