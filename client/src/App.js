@@ -3,10 +3,13 @@ import './App.css';
 import Home from './components/Home/Home';
 import ApiTest from './components/ApiTest/ApiTest';
 import Auth from './components/Auth/Auth';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
     <Router>
+            <ToastContainer position="top-center" />
+
       <div className="App">
         <nav className="App-nav">
           <div className="nav-container">
