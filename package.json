@@ -1,0 +1,17 @@
+{
+  "name": "my-fullstack-template",
+  "version": "1.0.0",
+  "description": "Full-stack React and Express template",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "cd client && npm start",
+    "server": "cd server && npm run start:watch",
+    "install-all": "npm install && cd client && npm install && cd ../server && npm install",
+    "test": "concurrently \"cd client && npm test\" \"cd server && npm test\"",
+    "lint": "cd client && npm run lint && cd ../server && npm run lint",
+    "format": "cd client && npm run format && cd ../server && npm run format"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0"
+  }
+}
