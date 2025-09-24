@@ -51,19 +51,13 @@ export default function Auth() {
     }
   };
 
-  const handleGoHome = () => {
-    navigate('/');
-  };
-
   return loading ? (
     <Loading />
   ) : (
     <>
-      <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-        <button className="home-link" onClick={handleGoHome}>
-          Home
-        </button>
-      </div>
+      <div
+        style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+      ></div>
       <div className="auth-container">
         <div className="sign-in-sign-out">
           <NavLink
