@@ -4,15 +4,14 @@ import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 
 export default class UserService {
-  static async create({ firstName, lastName, email, password }) {
+  static async create({  email, password }) {
     const passwordHash = await bcrypt.hash(
       password,
       Number(process.env.SALT_ROUNDS)
     );
 
     const user = await User.insert({
-      firstName,
-      lastName,
+
       email,
       passwordHash,
     });

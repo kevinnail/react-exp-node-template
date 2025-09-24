@@ -22,7 +22,7 @@ function Home() {
           <div className="feature-card">
             <h3>Authentication</h3>
             <p>User login, registration, and session management</p>
-            <Link to="/auth" className="feature-link">
+            <Link to="/auth/sign-in" className="feature-link">
               Go to Auth
             </Link>
           </div>
