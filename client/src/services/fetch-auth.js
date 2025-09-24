@@ -80,14 +80,13 @@ export async function signOutUser() {
       method: 'DELETE',
       credentials: 'include',
     });
-
     if (resp.ok) {
       return { success: true };
     } else {
-      return { success: false, error: 'Failed to sign out' };
+      throw new Error('Failed to sign out');
     }
   } catch (error) {
     console.error('Error in signOutUser:', error);
-    return { success: false, error: `Failed to sign out: ${error.message}` };
+    throw error;
   }
 }

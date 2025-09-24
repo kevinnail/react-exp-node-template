@@ -5,16 +5,16 @@ import { toast } from 'react-toastify';
 import './AuthTest.css';
 
 export default function AuthTest() {
-  const { user, setUser, setUserId } = useUser();
+  const { user, setUser } = useUser();
 
   const handleSignOut = async () => {
     try {
       await signOutUser();
       setUser(null);
-      setUserId(null);
       toast.success('Successfully signed out!');
     } catch (error) {
-      toast.error('Sign out failed.', error);
+      console.error('Sign out error:', error);
+      toast.error(`Sign out failed: ${error.message}`);
     }
   };
 
