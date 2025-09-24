@@ -16,17 +16,6 @@ const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      // For demo mode (non-local), skip auth and set demo user
-      if (!window.isLocal) {
-        setUser({
-          id: 'demo-user',
-          email: 'demo@example.com',
-        });
-        setUserId('demo-user');
-        setLoading(false);
-        return;
-      }
-
       try {
         const user = await getUser();
         // Only set user if we get valid user data from the server
@@ -38,7 +27,7 @@ const UserProvider = ({ children }) => {
         }
         setLoading(false);
       } catch (error) {
-        console.log('Error in fetchUser:', error);
+        console.error('Error in fetchUser:', error);
         setError(error);
         setUser(null);
         setLoading(false);
@@ -54,7 +43,16 @@ const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, error, setError, loading, setLoading, userId, setUserId }}
+      value={{
+        user,
+        setUser,
+        error,
+        setError,
+        loading,
+        setLoading,
+        userId,
+        setUserId,
+      }}
     >
       {children}
     </UserContext.Provider>
