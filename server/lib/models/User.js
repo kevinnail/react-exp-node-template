@@ -2,8 +2,6 @@ import pool from '../utils/pool.js';
 
 export default class User {
   id;
-  firstName;
-  lastName;
   email;
   #passwordHash; // private class field: hides it from anything outside of this class definition
 
