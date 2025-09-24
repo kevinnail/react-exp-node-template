@@ -9,10 +9,6 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.js';
 import { UserProvider } from './contexts/UserContext';
 import { ToastContainer } from 'react-toastify';
 
-window.isLocal =
-  window.location.hostname === 'localhost' ||
-  window.location.hostname === '127.0.0.1';
-
 export default function App() {
   return (
     <UserProvider>
