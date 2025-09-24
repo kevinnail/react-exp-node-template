@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-// import { NavLink, useParams, useNavigate, useLocation } from 'react-router-dom';
-import { NavLink, useNavigate, useLocation, useParams } from 'react-router-dom';
-// import { useUser } from '../../hooks/useUser.js';
+import React, { useEffect, useState } from 'react';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import './Auth.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,16 +9,19 @@ export default function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSignIn, setIsSignIn] = useState(true);
-  // const { user, logInUser } = useUser();
-  const {  logInUser } = useUser();
+  const { logInUser, user, loading, setLoading } = useUser();
   const { type } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
-  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    if (user) {
+      navigate('/auth-test');
+    }
+  }, [user]);
 
-  // if (!window.isLocal && user.id === 'demo-user' && user.email === 'demo@example.com') {
-  //   navigate('/');
-  // }
+  // Don't render until user context is loaded
+  if (loading) {
+    return <div className="auth-container">Loading...</div>;
+  }
 
   const submitAuth = async () => {
     try {
@@ -36,7 +37,7 @@ export default function Auth() {
       });
 
       // Redirect to the page they were trying to access, or home
-      const from = location.state?.from?.pathname || '/';
+      const from = location.state?.from?.pathname || '/auth-test';
       navigate(from, { replace: true });
     } catch (e) {
       console.error(e);
@@ -53,20 +54,24 @@ export default function Auth() {
   };
 
   if (loading) {
-    return (
-      <div className="auth-container">
-        Loading...
-      </div>
-    );
+    return <div className="auth-container">Loading...</div>;
   }
 
   return (
     <div className="auth-container">
       <div className="sign-in-sign-out">
-        <NavLink className="link" to="/auth/sign-in" onClick={() => setIsSignIn(true)}>
+        <NavLink
+          className="link"
+          to="/auth/sign-in"
+          onClick={() => setIsSignIn(true)}
+        >
           Sign-in
         </NavLink>
-        <NavLink className="link" to="/auth/sign-up" onClick={() => setIsSignIn(false)}>
+        <NavLink
+          className="link"
+          to="/auth/sign-up"
+          onClick={() => setIsSignIn(false)}
+        >
           Sign-up
         </NavLink>
       </div>
@@ -84,7 +89,7 @@ export default function Auth() {
           placeholder="email@email.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-        //   disabled={authLoading}
+          //   disabled={authLoading}
           required
         />
 
@@ -94,13 +99,11 @@ export default function Auth() {
           placeholder="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-        //   disabled={authLoading}
+          //   disabled={authLoading}
           required
         />
         {/* <button type="submit" disabled={authLoading}> */}
-        <button type="submit">
-          {isSignIn ? 'Sign In' : 'Sign Up'}
-        </button>
+        <button type="submit">{isSignIn ? 'Sign In' : 'Sign Up'}</button>
       </form>
     </div>
   );
