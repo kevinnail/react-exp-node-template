@@ -1,8 +1,9 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+    import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+// const User = require('../models/User');
+import User from '../models/User.js';
 
-module.exports = class UserService {
+export default class UserService {
   static async create({ firstName, lastName, email, password }) {
     const passwordHash = await bcrypt.hash(
       password,
@@ -39,4 +40,4 @@ module.exports = class UserService {
       throw error;
     }
   }
-};
+}
